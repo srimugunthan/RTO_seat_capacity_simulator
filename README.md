@@ -2,26 +2,12 @@
 
 An AI-powered tool for simulating office seat occupancy under hybrid work policies. Users describe scenarios in natural language and receive visual, calendar-based occupancy projections highlighting overflow risk.
 
-## Architecture
 
-```
-FastAPI (port 8000)  ←  Streamlit UI (port 8501)
-                     ←  Future frontends (React, etc.)
 
-Simulation backends: Binomial/Poisson | Monte Carlo
-NL parser: LangChain (provider-agnostic: OpenAI, Anthropic, Groq, Ollama)
-```
+## Demo
 
-## Project Status
 
-| Phase | Description | Status |
-|---|---|---|
-| 1 | Core simulation engine | ✓ Done |
-| 2 | FastAPI REST layer | ✓ Done |
-| 3 | LangChain NL query parser | ✓ Done |
-| 4 | Streamlit frontend | ✓ Done |
-| 5 | Polish, comparison mode, Docker | ✓ Done |
-
+https://github.com/user-attachments/assets/8a715b64-ff1a-4b8d-9e79-33fff2d7f2fa
 ---
 
 ## Installation
