@@ -81,14 +81,14 @@ docker compose up --build
 ```bash
 source .venv/bin/activate
 
-# All tests (147)
+# All tests (165)
 pytest backend/tests/ api/tests/ streamlit_app/tests/ tests/scenarios/ -v
 
 # By layer
-pytest backend/tests/ -v          # simulation engine (31 tests)
+pytest backend/tests/ -v          # simulation engine (46 tests — includes SimPy DES)
 pytest api/tests/ -v              # FastAPI endpoints (68 tests)
 pytest streamlit_app/tests/ -v    # Streamlit client (33 tests)
-pytest tests/scenarios/ -v        # edge cases + performance (15 tests)
+pytest tests/scenarios/ -v        # edge cases + performance (18 tests)
 ```
 
 ---
@@ -114,8 +114,9 @@ curl http://localhost:8000/backends
 ```json
 {
   "available": [
-    {"id": "binomial", "name": "Binomial/Poisson Analytical", "description": "..."},
-    {"id": "monte_carlo", "name": "Monte Carlo Simulation", "description": "..."}
+    {"id": "binomial",    "name": "Binomial/Poisson Analytical",        "description": "..."},
+    {"id": "monte_carlo", "name": "Monte Carlo Simulation",             "description": "..."},
+    {"id": "simpy_des",   "name": "SimPy Discrete-Event Simulation",    "description": "..."}
   ],
   "active": "monte_carlo"
 }
@@ -294,8 +295,14 @@ RTO_Capacity_Simulator/
 │   ├── models.py              # SimulationInput, DayResult, SimulationResult, SimulationBackend
 │   ├── binomial_backend.py    # Analytical closed-form model
 │   ├── monte_carlo_backend.py # Stochastic sampling with team correlation
+│   ├── simpy_backend.py       # Discrete-event simulation (heapq FCFS seat queuing)
 │   ├── registry.py            # Pluggable backend registry
 │   └── tests/
+│       ├── test_binomial.py
+│       ├── test_monte_carlo.py
+│       ├── test_simpy_backend.py  # Interface, known-answer, cross-backend, perf tests
+│       ├── test_interface.py
+│       └── test_registry.py
 ├── api/
 │   ├── main.py                # FastAPI app + caching + compare endpoint
 │   ├── schemas.py             # Pydantic request/response models
@@ -313,14 +320,16 @@ RTO_Capacity_Simulator/
 │   └── tests/
 ├── tests/
 │   └── scenarios/
-│       ├── test_known_scenarios.py   # Edge cases + cross-backend agreement
-│       └── test_performance.py       # MC < 2s, Binomial < 100ms
+│       ├── test_known_scenarios.py   # Edge cases + cross-backend agreement (Binomial, MC, DES)
+│       └── test_performance.py       # MC < 2s, Binomial < 100ms, DES < 10s
 ├── Dockerfile.api
 ├── Dockerfile.streamlit
 ├── docker-compose.yml
 ├── conftest.py
-├── requirements.txt
+├── requirements.txt           # includes simpy>=4.1
 ├── .env.example
+├── .gitignore
+├── models.md                  # Model documentation (how each backend works)
 └── plan.md
 ```
 
