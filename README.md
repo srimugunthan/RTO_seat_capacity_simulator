@@ -8,6 +8,7 @@ An AI-powered tool for simulating office seat occupancy under hybrid work polici
 
 
 https://github.com/user-attachments/assets/8a715b64-ff1a-4b8d-9e79-33fff2d7f2fa
+
 ---
 
 ## Installation
