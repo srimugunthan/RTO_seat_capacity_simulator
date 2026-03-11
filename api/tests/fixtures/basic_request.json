@@ -1,0 +1,13 @@
+{
+  "params": {
+    "total_employees": 500,
+    "total_seats": 400,
+    "wfh_days_per_week": 2,
+    "seat_reduction_pct": 0,
+    "compliance_rate": 0.9,
+    "num_simulation_runs": 500,
+    "start_date": "2026-03-02",
+    "end_date": "2026-03-06"
+  },
+  "backend": "monte_carlo"
+}

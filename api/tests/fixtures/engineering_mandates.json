@@ -1,0 +1,21 @@
+{
+  "params": {
+    "total_employees": 500,
+    "total_seats": 400,
+    "wfh_days_per_week": 3,
+    "seat_reduction_pct": 10,
+    "compliance_rate": 0.85,
+    "mandatory_office_days": {
+      "Engineering": ["Tuesday", "Thursday"]
+    },
+    "teams": [
+      {"name": "Engineering", "size": 80},
+      {"name": "Sales", "size": 60},
+      {"name": "General", "size": 360}
+    ],
+    "num_simulation_runs": 500,
+    "start_date": "2026-03-02",
+    "end_date": "2026-03-31"
+  },
+  "backend": "binomial"
+}
